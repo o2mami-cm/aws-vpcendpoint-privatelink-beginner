@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "Private Server for Consumer Template."
+Description: "Consumer Template."
 
 Parameters:
   # ------------------------------------------------------------#
@@ -90,6 +90,9 @@ Resources:
         - Key: "Name"
           Value: !Sub "${Prefix}-sg"
 
+  # ------------------------------------------------------------#
+  #  VPC Endpoint
+  # ------------------------------------------------------------#
   SsmVpcEndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -195,17 +198,3 @@ Resources:
       UserData: !Base64 |
         #! /bin/bash
         yum update -y
-
-# ------------------------------------------------------------#
-# Output Parameters
-# ------------------------------------------------------------#   
-Outputs:
-  Ec2Role:
-    Value: !Ref Ec2Role
-    Export:
-      Name: Ec2Role
-  
-  Ec2InstanceProfile:
-    Value: !Ref Ec2InstanceProfile
-    Export:
-      Name: Ec2InstanceProfile
